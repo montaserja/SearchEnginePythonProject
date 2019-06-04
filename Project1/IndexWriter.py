@@ -1,8 +1,61 @@
+from __future__ import division
 import re
 import pickle
 import os
 import binascii
+from io import BytesIO
+import sys
 
+from struct import pack
+from struct import unpack
+
+
+def decode(bytestream):
+    """Variable byte code decode.
+    Usage:
+      import vbcode
+      vbcode.decode(bytestream)
+        -> [32, 64, 128]
+    """
+    n = 0
+    numbers = []
+    bytestream = unpack('%dB' % len(bytestream), bytestream)
+    for byte in bytestream:
+        if byte < 128:
+            n = 128 * n + byte
+        else:
+            n = 128 * n + (byte - 128)
+            numbers.append(n)
+            n = 0
+    return numbers
+
+
+def encode_number(number):
+    """Variable byte code encode number.
+        Usage:
+          import vbcode
+          vbcode.encode_number(128)
+        """
+    bytes_list = []
+    while True:
+        bytes_list.insert(0, number % 128)
+        if number < 128:
+            break
+        number = number // 128
+    bytes_list[-1] += 128
+    return pack('%dB' % len(bytes_list), *bytes_list)
+
+
+def encode(numbers):
+    """Variable byte code encode numbers.
+    Usage:
+      import vbcode
+      vbcode.encode([32, 64, 128])
+    """
+    bytes_list = []
+    for number in numbers:
+        bytes_list.append(encode_number(number))
+    return b"".join(bytes_list)
 
 class SlowIndexWriter:
 
@@ -57,31 +110,58 @@ class SlowIndexWriter:
                 leng=0;
                 for i in range(len(product)):
                     #self.binary_file.write(i.to_bytes(4, byteorder='big'))
-                    self.binary_file.write(product[i][11:].encode('utf8'))
-                    self.binary_file.write(helpfulness[i][13:].encode('utf8'))
-                    self.binary_file.write(int(float(score[i][7:])).to_bytes(1, byteorder='big'))
-                    #print(bin(int(binascii.hexlify('hello'), 16)))
+                    stringToWrite=product[i][11:]
+                    for c in stringToWrite:
+                        self.binary_file.write(encode_number(ord(c)))
+                    stringToWrite = helpfulness[i][13:]
+                    for c in stringToWrite:
+                        self.binary_file.write(encode_number(ord(c)))
+                    self.binary_file.write(encode_number(int(float(score[i][7:]))))
+
                     text[i] = re.sub("[^a-zA-Z0-9]+", " ", text[i])
                     my_text = text[i][5:].lower()
                     arr=my_text.split(" ")
+                    wordsfileOp="wb"
+                    if os.path.isfile(dir + "\words.txt"):
+                        wordsfileOp="ab"
                     #word arr[freq] arr[index] arr[]
-
-                    for word in arr:
-                        if word in dict.keys():
-                            if i in dict[word]["freq"].keys():
-                                dict[word]["freq"][i] += 1
+                    with open(dir + "\words.txt", wordsfileOp) as words:
+                        for idx,word in enumerate(arr):
+                            if word in dict.keys():
+                                if i in dict[word]["freq"].keys():
+                                    dict[word]["freq"][i] += 1
+                                    dict[word]["place"][i].append(idx)
+                                else:
+                                    dict[word]["freq"][i] = 1
+                                    dict[word]["place"][i] = [idx]
+                                dict[word]["totalFreq"] += 1
                             else:
-                                dict[word]["freq"][i] = 1
-                            dict[word]["totalFreq"] += 1
-                        else:
-                            dict[word] = {"indexInWordsFile":0,"totalFreq":1,"freq":{}}
-                            dict[word]["indexInWordsFile"]=leng
-                            leng+=len(word)
-                            dict[word]["freq"][i]=1
-
-
+                                words.write(word.encode('utf8'))
+                                dict[word] = {"indexInWordsFile":0,"totalFreq":1,"freq":{},"place":{}}
+                                dict[word]["indexInWordsFile"]=leng
+                                leng += len(word)
+                                dict[word]["freq"][i]=1
+                                dict[word]["place"][i]=[idx]
                     self.binary_file.write("\n".encode('utf8'))
 
+            with open(dir + "\data.txt", "wb") as data:
+                for word in dict:
+                    data.write(encode(dict[word]["freq"]))
+                    data.write("\n".encode('utf8'))
+                    data.write(encode(dict[word]["freq"].values()))
+                    data.write("\n".encode('utf8'))
+                    data.write(encode_number(dict[word]["indexInWordsFile"]))
+                    data.write("\n".encode('utf8'))
+                    data.write(encode_number(dict[word]["totalFreq"]))
+                    data.write("\n".encode('utf8'))
+
+            with open(dir + "\data.txt", "rb") as data:
+                count=0
+                for line in data:
+                    print(decode(line))
+                    if count == 3:
+                        break
+                    count+=1
                     #self.binary_file.write((text[i][6:].lower()).encode('utf8'))
                     #self.binary_file.write("\n".encode('utf8'))
 
@@ -98,5 +178,5 @@ class SlowIndexWriter:
             print("Deletion of the directory %s failed" % dir)
 
 
-dir = "../../Desktop/projectSheltot"
+dir = "../projectSheltot"
 SlowIndexWriter.slowWrite(SlowIndexWriter, dir + "/100.txt", dir)
