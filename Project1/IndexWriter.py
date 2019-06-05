@@ -110,20 +110,21 @@ class SlowIndexWriter:
                 leng=0;
                 for i in range(len(product)):
                     #self.binary_file.write(i.to_bytes(4, byteorder='big'))
-                    stringToWrite=product[i][11:]
-                    for c in stringToWrite:
-                        self.binary_file.write(encode_number(ord(c)))
                     stringToWrite = helpfulness[i][13:]
                     for c in stringToWrite:
                         self.binary_file.write(encode_number(ord(c)))
+                    stringToWrite=product[i][11:]
+                    for c in stringToWrite:
+                        self.binary_file.write(encode_number(ord(c)))
                     self.binary_file.write(encode_number(int(float(score[i][7:]))))
-
                     text[i] = re.sub("[^a-zA-Z0-9]+", " ", text[i])
                     my_text = text[i][5:].lower()
+                    txt_length=len(my_text)
+                    self.binary_file.write(encode_number(txt_length))
                     arr=my_text.split(" ")
                     wordsfileOp="wb"
                     if os.path.isfile(dir + "\words.txt"):
-                        wordsfileOp="ab"
+                        wordsfileOp="ab"#if you want to apent to file just write "ab"
                     #word arr[freq] arr[index] arr[]
                     with open(dir + "\words.txt", wordsfileOp) as words:
                         for idx,word in enumerate(arr):
@@ -144,30 +145,16 @@ class SlowIndexWriter:
                                 dict[word]["place"][i]=[idx]
                     self.binary_file.write("\n".encode('utf8'))
 
+
+
             with open(dir + "\data.txt", "wb") as data:
                 for word in dict:
+                    data.write(encode_number(dict[word]["indexInWordsFile"]))
+                    data.write("\n".encode('utf8'))
                     data.write(encode(dict[word]["freq"]))
                     data.write("\n".encode('utf8'))
                     data.write(encode(dict[word]["freq"].values()))
                     data.write("\n".encode('utf8'))
-                    data.write(encode_number(dict[word]["indexInWordsFile"]))
-                    data.write("\n".encode('utf8'))
-                    data.write(encode_number(dict[word]["totalFreq"]))
-                    data.write("\n".encode('utf8'))
-
-            with open(dir + "\data.txt", "rb") as data:
-                count=0
-                for line in data:
-                    print(decode(line))
-                    if count == 3:
-                        break
-                    count+=1
-                    #self.binary_file.write((text[i][6:].lower()).encode('utf8'))
-                    #self.binary_file.write("\n".encode('utf8'))
-
-
-                #num_bytes_written = self.binary_file.write(b'\xDE\xAD\xBE\xEF')
-                #print("Wrote %d bytes." % num_bytes_written)
 
     def removeIndex(self, dir):
         """Delete all index files by removing the given

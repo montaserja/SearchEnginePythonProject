@@ -1,17 +1,79 @@
+from __future__ import division
 import re
 import pickle
 import os
+import binascii
+from io import BytesIO
+import sys
+
+from struct import pack
+from struct import unpack
+
+def decode(bytestream):
+    """Variable byte code decode.
+    Usage:
+      import vbcode
+      vbcode.decode(bytestream)
+        -> [32, 64, 128]
+    """
+    n = 0
+    numbers = []
+    bytestream = unpack('%dB' % len(bytestream), bytestream)
+    for byte in bytestream:
+        if byte < 128:
+            n = 128 * n + byte
+        else:
+            n = 128 * n + (byte - 128)
+            numbers.append(n)
+            n = 0
+    return numbers
 
 class IndexReader:
+
+    def readIndexFile(self,type,reviewId,nullreturn):
+        datatoreturn=nullreturn
+        if self.found:
+            with open(self.dir + "\index.txt", "rb") as data:
+
+                for i, line in enumerate(data):
+                    if reviewId - 1 == i:
+                        id = decode(line)
+                        count = 0
+                        for idx, item in enumerate(id):
+                            if item == 47:
+                                count = idx
+                                break
+                        if type=="score":
+                            datatoreturn=id[2*count+1+self.productIdLen]
+                            break
+                        elif type=="id":
+                            datatoreturn= ''.join(chr(i) for i in id[2*count+1:2*count+1+self.productIdLen])
+                            break
+                        elif type=="numerator":
+                            datatoreturn = int(''.join(chr(i) for i in id[0:count]))
+                            #datatoreturn=int(chr(id[self.productIdLen:length]))
+                        elif type=="denominator":
+                            length = int((len(id) - self.productIdLen - 1) / 2) + self.productIdLen
+                            datatoreturn = int(''.join(chr(i) for i in id[count+1:2*count+1]))
+                        elif type=="length":
+                            datatoreturn = id[2 * count + 1 + self.productIdLen+1]
+                    elif reviewId - 1 < i:
+                        break
+        return datatoreturn
 
     def __init__(self, dir):
         """Creates an IndexReader which will read from
         the given directory"""
+        self.found = False
+        self.dir=dir
         if os.path.isdir(dir):
-            if os.path.isfile(dir+"/Index.pkl"):
-                pickle_off = open(dir + "/Index.pkl", "rb")
-                self.data_dict = pickle.load(pickle_off)
-                pickle_off.close()
+            if os.path.isfile(dir+"/Index.txt"):
+                    self.found=True
+                    self.productIdLen=10
+            else:
+                print("file not found")
+        else:
+            print("dir Not Found")
 
 
 
@@ -20,57 +82,35 @@ class IndexReader:
         review
         Returns null if there is no review with the
         given identifier"""
-        try:
-            return self.data_dict[reviewId]["product"]
-        except:
-            print("there is no item with this review id")
-            return None
+        return self.readIndexFile("id",reviewId,None)
+
 
     def getReviewScore(self, reviewId):
         """Returns the score for a given review
         Returns -1 if there is no review with the given
         identifier"""
-        try:
-            return float(self.data_dict[reviewId]["score"])
-        except:
-            print("there is no item with this review id")
-            return -1
+        return self.readIndexFile("score",reviewId,-1)
 
     def getReviewHelpfulnessNumerator(self, reviewId):
         """Returns the numerator for the helpfulness of
         a given review
         Returns -1 if there is no review with the given
         identifier"""
-        try:
-            my_str = self.data_dict[reviewId]["helpfulness"]
-            return int(my_str[:my_str.find('/')])
-        except:
-            print("there is no item with this review id")
-            return -1
+        return self.readIndexFile("numerator",reviewId,-1)
 
     def getReviewHelpfulnessDenominator(self, reviewId):
         """Returns the denominator for the helpfulness
         of a given review
         Returns -1 if there is no review with the given
         identifier"""
-        try:
-            my_str=self.data_dict[reviewId]["helpfulness"]
-            return int(my_str[my_str.find('/')+1:])
-        except:
-            print("there is no item with this review id")
-            return -1
+        return self.readIndexFile("denominator",reviewId,-1)
 
     def getReviewLength(self, reviewId):
         """Returns the number of tokens in a given
         review
         Returns -1 if there is no review with the given
         identifier"""
-        try:
-            my_str = self.data_dict[reviewId]["text"]
-            return len(my_str)
-        except:
-            print("there is no item with this review id")
-            return -1
+        return self.readIndexFile("length",reviewId,-1)
 
     def getTokenFrequency(self, token):
         """Return the number of reviews containing a
@@ -151,8 +191,8 @@ class IndexReader:
 
 
 
-dir = "../../Desktop/projectSheltot"
+dir = "../projectSheltot"
 
 
 reader=IndexReader(dir)
-print(reader.getTokenSizeOfReviews())
+print(reader.getReviewLength(100))
