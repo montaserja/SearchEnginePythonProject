@@ -8992,7 +8992,7 @@ review/text: Not hot at all. Like the other low star reviewer, I got suckered by
 product/productId: B006F2NYI2
 review/userId: A132DJVI37RB4X
 review/profileName: Scottdrum
-review/helpfulness: 2/5
+review/helpfulness: 222/50
 review/score: 2.0
 review/time: 1332374400
 review/summary: Not hot, not habanero

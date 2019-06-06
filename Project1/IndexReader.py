@@ -34,32 +34,55 @@ class IndexReader:
         datatoreturn=nullreturn
         if self.found:
             with open(self.dir + "\index.txt", "rb") as data:
-
                 for i, line in enumerate(data):
                     if reviewId - 1 == i:
                         id = decode(line)
-                        count = 0
-                        for idx, item in enumerate(id):
-                            if item == 47:
-                                count = idx
-                                break
                         if type=="score":
-                            datatoreturn=id[2*count+1+self.productIdLen]
+                            datatoreturn=id[self.productIdLen]
                             break
                         elif type=="id":
-                            datatoreturn= ''.join(chr(i) for i in id[2*count+1:2*count+1+self.productIdLen])
+                            datatoreturn= ''.join(chr(i) for i in id[:self.productIdLen])
                             break
                         elif type=="numerator":
-                            datatoreturn = int(''.join(chr(i) for i in id[0:count]))
+                            count=0
+                            for idx,c in enumerate(id):
+                                if c==47:
+                                    break
+                                count += 1
+                            datatoreturn = int(''.join(chr(i) for i in id[self.productIdLen+1:count]))
                             #datatoreturn=int(chr(id[self.productIdLen:length]))
                         elif type=="denominator":
-                            length = int((len(id) - self.productIdLen - 1) / 2) + self.productIdLen
-                            datatoreturn = int(''.join(chr(i) for i in id[count+1:2*count+1]))
-                        elif type=="length":
-                            datatoreturn = id[2 * count + 1 + self.productIdLen+1]
+                            count = 0
+                            for idx, c in enumerate(id):
+                                if c == 47:
+                                    break
+                                count += 1
+                            datatoreturn = int(''.join(chr(i) for i in id[count+1:]))
+                    elif type=="ReviewsNum":
+                        datatoreturn=i
                     elif reviewId - 1 < i:
                         break
         return datatoreturn
+
+    def readWordsFile(self,token):
+        if self.found:
+            with open(self.dir + "\words.txt", "rb") as words:
+                for i, line in enumerate(words):
+                    if line.decode('utf8')==token+"\n":
+                        return self.readDataFile(i)
+                return []
+
+    def readDataFile(self,i):
+        arr=[]
+        with open(self.dir + "\data.txt", "rb") as data:
+            for idx, line in enumerate(data):
+                if idx==i*2:
+                    arr=decode(line)
+                elif idx==(i*2)+1:
+                    arr+=decode(line)
+                elif idx>i*2:
+                    break
+        return arr
 
     def __init__(self, dir):
         """Creates an IndexReader which will read from
@@ -110,33 +133,36 @@ class IndexReader:
         review
         Returns -1 if there is no review with the given
         identifier"""
-        return self.readIndexFile("length",reviewId,-1)
+        if reviewId==0:
+            return -1
+        with open(self.dir + "\TotalFreq.txt", "rb") as freq:
+            for i, line in enumerate(freq):
+                if i==reviewId:
+                    return int(line.decode('utf8'))
+        return -1
 
     def getTokenFrequency(self, token):
         """Return the number of reviews containing a
         given token (i.e., word)
         Returns 0 if there are no reviews containing
         this token"""
-        if hasattr(self, 'data_dict'):
-            count=0
-            for i in range(int(len(self.data_dict))):
-                if(token in self.data_dict[i+1]["text"]):
-                    count+=1
-            return count
+        return int(len(self.readWordsFile(token))/2)-1
+
     def getTokenCollectionFrequency(self, token):
         """Return the number of times that a given
         token (i.e., word) appears in
         the reviews indexed
         Returns 0 if there are no reviews containing
         this token"""
+        arr=self.readWordsFile(token)
+        arr=arr[int(len(arr)/2):]
         count=0
-        for i in range(int(len(self.data_dict))):
-            my_str=self.data_dict[i+1]["text"]
-            count+=my_str.count(token)
+        for item in arr :
+            count+=item
         return count
 
     def get_reviews_with_token_text(self,id,freq):
-        return "id"+str(id)+", freq-"+str(freq)
+        return "id-"+str(id)+", freq-"+str(freq)
 
     def getReviewsWithToken(self, token):
         """Returns a series of integers of the form id1, freq-1, id-2, freq-2, ... such
@@ -147,31 +173,36 @@ class IndexReader:
         Note that the integers should be sorted by id
         Returns an empty Tuple if there are no reviews
         containing this token"""
-        final_text=""
-        for i in range(int(len(self.data_dict))):
-            my_str = self.data_dict[i+1]["text"]
-            freq = my_str.count(token)
-            if freq != 0:
-                final_text += self.get_reviews_with_token_text(i+1, freq)+", "
-        if len(final_text) != 0:
-            final_text = final_text[0:-2]
-
-        return final_text
+        str=[]
+        ids=self.readWordsFile(token)
+        freq= ids[int(len(ids)/2):]
+        ids=ids[:int(len(ids)/2)]
+        if len(ids)!=len(freq):
+            return "there is a mistake in the arrays"
+        else:
+            for i,item in enumerate(ids):
+                str.append(item)
+                str.append(freq[i])
+                # str+=self.get_reviews_with_token_text(item,freq[i])
+                # if i!=len(ids)-1:
+                #     str+=","
+            return tuple(str)
 
     def getNumberOfReviews(self):
         """Return the number of product reviews
         available in the system"""
-        return len(self.data_dict)
+        return self.readIndexFile("ReviewsNum",0,0)+1
 
     def getTokenSizeOfReviews(self):
         """Return the number of tokens in the system
         (Tokens should be counted as many times as they
         appear)"""
-        count=0
-        for i in range(int(len(self.data_dict))):
-            my_str = self.data_dict[i + 1]["text"]
-            count+=len(re.findall(r'\w+', my_str))
-        return count
+        with open(self.dir + "\TotalFreq.txt", "rb") as total:
+            for line in total:
+                num=decode(line)
+                break
+
+        return num[0]
 
     def getProductReviews(self, productId):
         """Return the ids of the reviews for a given
@@ -181,18 +212,19 @@ class IndexReader:
         Returns an empty Tuple if there are no reviews
         for this product"""
         ids=[]
-        j=0
-        for i in range(int(len(self.data_dict))):
-            my_id = self.data_dict[i + 1]["product"]
-            if my_id==productId:
-                ids.append(i+1)
-                j+=1
-        return ids
-
+        if self.found:
+            with open(self.dir + "\index.txt", "rb") as data:
+                for i, line in enumerate(data):
+                    id = decode(line)
+                    datatoreturn = ''.join(chr(i) for i in id[:self.productIdLen])
+                    if datatoreturn==productId:
+                        ids.append(i)
+        return tuple(ids)
 
 
 dir = "../projectSheltot"
 
 
+
 reader=IndexReader(dir)
-print(reader.getReviewLength(100))
+print(reader.getTokenSizeOfReviews())
