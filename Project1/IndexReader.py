@@ -1,12 +1,5 @@
 from __future__ import division
-import re
-import pickle
 import os
-import binascii
-from io import BytesIO
-import sys
-
-from struct import pack
 from struct import unpack
 
 def decode(bytestream):
@@ -31,6 +24,7 @@ def decode(bytestream):
 class IndexReader:
 
     def readIndexFile(self,type,reviewId,nullreturn):
+        """this function reads the index.txt file and returns thae reviewid (type) data """
         datatoreturn=nullreturn
         if self.found:
             with open(self.dir + "\index.txt", "rb") as data:
@@ -65,6 +59,7 @@ class IndexReader:
         return datatoreturn
 
     def readWordsFile(self,token):
+        """this function reads the words.txt file and call the readDataFile with the index of the token"""
         if self.found:
             with open(self.dir + "\words.txt", "rb") as words:
                 for i, line in enumerate(words):

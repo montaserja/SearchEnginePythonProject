@@ -79,13 +79,13 @@ class SlowIndexWriter:
         text=re.findall(r"text:.+",my_data)
         self.file.close()
         dict={}
-        if(not os.path.isdir(dir)):
+        if(not os.path.isdir(dir)):#creates the dir if not exist
             try:
                 os.makedirs(dir)
             except OSError:
                 print("Creation of the directory %s failed" % dir)
 
-        if read:
+        if read:#if we have read the data
             if(os.path.isfile(dir+"\words.txt")):
                 os.remove(dir+"\words.txt")
             with open(dir+"\index.txt", "wb") as self.binary_file:
@@ -103,7 +103,6 @@ class SlowIndexWriter:
                     text[i] = re.sub("[^a-zA-Z0-9]+", " ", text[i])
                     my_text = text[i][5:].lower()
                     txt_length=len(my_text)
-
                     # self.binary_file.write(encode_number(txt_length))
                     arr=my_text.split(" ")
                     reviewsize.append(len(arr)-1)
@@ -135,7 +134,6 @@ class SlowIndexWriter:
             with open(dir + "\TotalFreq.txt", "wb") as TotalFreq:
                 TotalFreq.write(encode_number(wordsinFile))
                 TotalFreq.write("\n".encode('utf8'))
-
                 for s,freq in enumerate(reviewsize):
                     TotalFreq.write(str(freq).encode('utf8'))
                     TotalFreq.write("\n".encode('utf8'))
