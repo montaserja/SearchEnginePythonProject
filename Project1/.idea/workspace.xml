@@ -2,9 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ac5b4a3-f526-4181-9052-5cbd258306f2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Project1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Project1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IndexReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/IndexReader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IndexWriter.py" beforeDir="false" afterPath="$PROJECT_DIR$/SlowIndexWriter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projectSheltot/100.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projectSheltot/1000.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projectSheltot/TotalFreq.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projectSheltot/data.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projectSheltot/index.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projectSheltot/words.txt" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SlowIndexWriter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-94">
-              <caret line="135" column="52" selection-start-line="135" selection-start-column="52" selection-end-line="135" selection-end-column="52" />
+            <state relative-caret-position="1904">
+              <caret line="116" column="62" selection-start-line="116" selection-start-column="62" selection-end-line="116" selection-end-column="62" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -27,10 +34,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IndexWriter.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1564">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/IndexReader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2167">
-              <caret line="69" column="29" selection-start-line="69" selection-start-column="29" selection-end-line="69" selection-end-column="29" />
+            <state relative-caret-position="405">
+              <caret line="302" column="40" lean-forward="true" selection-start-line="302" selection-start-column="40" selection-end-line="302" selection-end-column="40" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -53,12 +72,20 @@
       <find>i</find>
       <find>len</find>
       <find>getTokenSizeOfReviews</find>
-      <find>prin</find>
       <find>readWordsFile</find>
       <find>is</find>
       <find>leng</find>
       <find>wordsinFile</find>
       <find>path</find>
+      <find>return</find>
+      <find>filesname</find>
+      <find>wordsDict</find>
+      <find>write</find>
+      <find>prin</find>
+      <find>mergedFile</find>
+      <find>words</find>
+      <find>line</find>
+      <find>itemList</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -68,9 +95,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Index.py" />
+        <option value="$PROJECT_DIR$/SlowIndexWriter.py" />
         <option value="$PROJECT_DIR$/IndexWriter.py" />
         <option value="$PROJECT_DIR$/IndexReader.py" />
-        <option value="$PROJECT_DIR$/SlowIndexWriter.py" />
       </list>
     </option>
   </component>
@@ -85,6 +112,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -96,11 +124,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$USER_HOME$/PycharmProjects/exercise" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -119,7 +148,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.IndexWriter">
+  <component name="RunManager" selected="Python.IndexReader">
     <configuration name="Index" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Project1" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -132,7 +161,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\montaserja\PycharmProjects\Project1\IndexWriter.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/IndexWriter.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -183,11 +212,16 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.Index" />
+      <item itemvalue="Python.IndexReader" />
+      <item itemvalue="Python.IndexWriter" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.IndexWriter" />
         <item itemvalue="Python.IndexReader" />
         <item itemvalue="Python.Index" />
+        <item itemvalue="Python.IndexWriter" />
       </list>
     </recent_temporary>
   </component>
@@ -205,16 +239,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21875" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2186512" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3289689" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39934534" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32827735" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39869988" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -228,11 +262,7 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../../year4_shaeltot/ex3_montaserja.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2057" />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../../year4_shaeltot/ex3_montaserja.py" />
     <entry file="file://$PROJECT_DIR$/IndexReader" />
     <entry file="file://$PROJECT_DIR$/100.txt">
       <provider selected="true" editor-type-id="text-editor">
@@ -241,27 +271,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../year4_shaeltot/ex2_montaserja.py">
+    <entry file="file://$PROJECT_DIR$/../../year4_shaeltot/ex2_montaserja.py" />
+    <entry file="file://$PROJECT_DIR$/SlowIndexWriter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IndexReader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2167">
-          <caret line="69" column="29" selection-start-line="69" selection-start-column="29" selection-end-line="69" selection-end-column="29" />
+        <state relative-caret-position="1904">
+          <caret line="116" column="62" selection-start-line="116" selection-start-column="62" selection-end-line="116" selection-end-column="62" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SlowIndexWriter.py">
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/tokenize.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-94">
-          <caret line="135" column="52" selection-start-line="135" selection-start-column="52" selection-end-line="135" selection-end-column="52" />
+        <state relative-caret-position="176">
+          <caret line="451" selection-start-line="451" selection-end-line="451" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IndexWriter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1564">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IndexReader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="302" column="40" lean-forward="true" selection-start-line="302" selection-start-column="40" selection-end-line="302" selection-end-column="40" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
