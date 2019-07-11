@@ -1,3 +1,9 @@
+
+"""
+    Montaser Jafrah 316367838
+    Ibrahim Idkedek 205860968
+"""
+
 import re
 import os
 import datetime
@@ -221,6 +227,16 @@ class IndexWriter:
         except OSError as e:
             print(e)
 
+    def removeIndex(self, dir):
+        """Delete all index files by removing the given
+        directory"""
+        try:
+            files = os.listdir(dir)
+            for file in files:
+                os.remove(dir+"\\"+file)
+            os.rmdir(dir)
+        except OSError:
+            print("Deletion of the directory %s failed" % dir)
 
 
 
@@ -267,14 +283,19 @@ def marginFiles(dir, file1,file2, counter):
             line1 = file1.readline()
 
 
-def removeIndex(self, dir):
-        """Delete all index files by removing the given
-        directory"""
 
 
+"""
 dir = "../projectSheltot"
 x = datetime.datetime.now()
 print(x)
-IndexWriter.write(IndexWriter, dir + "/Books1000000.txt", dir+"\\files")
+IndexWriter.removeIndex(IndexWriter, dir+"\\files")
+IndexWriter.write(IndexWriter, dir + "/Books1000.txt", dir+"\\files")
+try:  # opens the file to read
+    time = open('../results.txt', 'w')
+except OSError as e:
+    print(e)
 x2=datetime.datetime.now()
 print(x2-x)
+time.write(str(x2-x))
+"""

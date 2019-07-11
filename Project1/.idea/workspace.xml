@@ -2,16 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ac5b4a3-f526-4181-9052-5cbd258306f2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Project1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Project1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/316367838_205860968.zip" beforeDir="false" afterPath="$PROJECT_DIR$/316367838_205860968.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IndexReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/IndexReader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projectSheltot/100.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projectSheltot/1000.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projectSheltot/TotalFreq.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projectSheltot/data.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projectSheltot/index.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projectSheltot/words.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IndexWriter.py" beforeDir="false" afterPath="$PROJECT_DIR$/IndexWriter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzes.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/readme.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,8 +20,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SlowIndexWriter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1904">
-              <caret line="116" column="62" selection-start-line="116" selection-start-column="62" selection-end-line="116" selection-end-column="62" />
+            <state relative-caret-position="2550">
+              <caret line="150" column="8" selection-start-line="150" selection-start-column="8" selection-end-line="153" selection-end-column="62" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -33,11 +29,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/IndexWriter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1564">
-              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+            <state relative-caret-position="-4511">
+              <caret line="1" selection-start-line="1" selection-end-line="4" selection-end-column="3" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -45,11 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/IndexReader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="302" column="40" lean-forward="true" selection-start-line="302" selection-start-column="40" selection-end-line="302" selection-end-column="40" />
+            <state relative-caret-position="34">
+              <caret line="2" column="29" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="29" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -86,6 +82,7 @@
       <find>words</find>
       <find>line</find>
       <find>itemList</find>
+      <find>getReviewsWithToken</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -148,7 +145,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.IndexReader">
+  <component name="RunManager" selected="Python.Index">
     <configuration name="Index" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Project1" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -219,8 +216,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.IndexReader" />
         <item itemvalue="Python.Index" />
+        <item itemvalue="Python.IndexReader" />
         <item itemvalue="Python.IndexWriter" />
       </list>
     </recent_temporary>
@@ -272,16 +269,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../year4_shaeltot/ex2_montaserja.py" />
-    <entry file="file://$PROJECT_DIR$/SlowIndexWriter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1904">
-          <caret line="116" column="62" selection-start-line="116" selection-start-column="62" selection-end-line="116" selection-end-column="62" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/ProgramData/Anaconda3/Lib/tokenize.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
@@ -289,22 +276,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IndexWriter.py">
+    <entry file="file://$PROJECT_DIR$/SlowIndexWriter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1564">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="2550">
+          <caret line="150" column="8" selection-start-line="150" selection-start-column="8" selection-end-line="153" selection-end-column="62" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/Temp1_316367838_205860968.zip/IndexReader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4766" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/IndexReader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="302" column="40" lean-forward="true" selection-start-line="302" selection-start-column="40" selection-end-line="302" selection-end-column="40" />
+        <state relative-caret-position="34">
+          <caret line="2" column="29" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="29" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IndexWriter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4511">
+          <caret line="1" selection-start-line="1" selection-end-line="4" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>

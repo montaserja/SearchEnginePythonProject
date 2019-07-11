@@ -1,3 +1,7 @@
+"""
+    Montaser Jafrah 316367838
+    Ibrahim Idkedek 205860968
+"""
 from __future__ import division
 import os
 
@@ -95,12 +99,12 @@ class IndexReader:
             file = open(self.dir + "\\data.txt", 'r')
             size = 0
             while True:
-                block = file.readlines(536870912 * 2)  # 536870912*2
+                block = file.readlines(536870912*2)  # 536870912*2
                 length = len(block)
                 size += length
                 if not block:
                     break
-                if i < size:
+                if i <= size:
                     numTorm = size - length
                     temp=self.binarySearch(block, 0, length, i - numTorm)
                     del block
@@ -294,12 +298,13 @@ class IndexReader:
             except OSError as e:
                 print(e)
         return tuple(ids)
-
+"""
 import datetime
 dir = "../projectSheltot"
 reader=IndexReader(dir)
 x = datetime.datetime.now()
 print(x)
-print(reader.getReviewsWithToken("the"))
+print(reader.getReviewsWithToken("is"))
 x2=datetime.datetime.now()
 print(x2-x)
+"""
